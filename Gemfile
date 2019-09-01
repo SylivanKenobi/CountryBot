@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'telegram_bot'
+gem 'nokogiri'
+gem 'rack', '~> 2.0.1'
+gem 'rspec'
