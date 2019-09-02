@@ -25,22 +25,25 @@ bot.get_updates(fail_silently: true) do |message|
         break
       end
       resString.map { |e|
+        result = ""
         e.each do |q,i|
-        #while i < e.size do
-          if e.values[i].instance_of?(Array)
-            result += e.keys[i] +":  "+ e.values[i].join(",") + "\n\n"
-          elsif e.values[i].instance_of?(Integer) || e.values[i].instance_of?(Hash) || e.values[i].instance_of?(Float)
-            result += e.keys[i] +":  "+ e.values[i].to_s + "\n\n"
-          elsif e.values[i].nil? || e == 0
-            result += e.keys[i] + "\n\n"
-          else
-            result += e.keys[i] +":  "+ e.values[i] + "\n\n"
+          unless q == "alpha2Code" || q == "alpha3Code" || q == "latlng" || q == "gini"
+            puts q
+            if i.instance_of?(Array)
+              result += q +":  "+ i.join(",") + "\n\n"
+            elsif i.instance_of?(Integer) || i.instance_of?(Hash) || i.instance_of?(Float)
+              result += q +":  "+ i.to_s + "\n\n"
+            elsif i.nil? || e == 0
+              result += q + "\n\n"
+            else
+              result += q +":  "+ i + "\n\n"
+            end
           end
         end
-        end
+        reply.text = result
+        reply.send_with(bot)
       }
-      reply.text = result
-      reply.send_with(bot)
     end
+    reply.send_with(bot)
   end
 end
