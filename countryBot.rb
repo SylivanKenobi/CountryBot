@@ -25,7 +25,8 @@ bot.get_updates(fail_silently: true) do |message|
         break
       end
       resString.map { |e|
-        while i < e.size do
+        e.each do |q,i|
+        #while i < e.size do
           if e.values[i].instance_of?(Array)
             result += e.keys[i] +":  "+ e.values[i].join(",") + "\n\n"
           elsif e.values[i].instance_of?(Integer) || e.values[i].instance_of?(Hash) || e.values[i].instance_of?(Float)
@@ -35,7 +36,7 @@ bot.get_updates(fail_silently: true) do |message|
           else
             result += e.keys[i] +":  "+ e.values[i] + "\n\n"
           end
-          i += 1
+        end
         end
       }
       reply.text = result
