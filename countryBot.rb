@@ -15,19 +15,19 @@ bot.get_updates(fail_silently: true) do |message|
   command = message.get_command_for(bot)
 
     message.reply do |reply|
-      result = ""
+      path = Dir.pwd
     case command
     when /start/i
       reply.text = "I am your Trainer"
     when /p/i      
       reply.text = m.match(message.text)[1] + " Pushups have benn added";
       puts m.match(message.text)[1].to_i + 1
-      File.write('/home/sylvain/Documents/countryBot/pushup.txt', File.read('/home/sylvain/Documents/countryBot/pushup.txt').to_i + m.match(message.text)[1].to_i)
+      File.write(path + '/pushup.txt', File.read(path + '/pushup.txt').to_i + m.match(message.text)[1].to_i)
     when /c/i
       reply.text = m.match(message.text)[1] + " Crunches have benn added"
-      File.write('/home/sylvain/Documents/countryBot/crouch.txt', File.read('/home/sylvain/Documents/countryBot/crouch.txt').to_i + m.match(message.text)[1].to_i)
+      File.write(path + '/crouch.txt', File.read(path + '/crouch.txt').to_i + m.match(message.text)[1].to_i)
     when /stats/i
-      reply.text = File.read('/home/sylvain/Documents/countryBot/crouch.txt') + " Crouches " + File.read('/home/sylvain/Documents/countryBot/pushup.txt') + " Pushups"
+      reply.text = File.read(path + '/crouch.txt') + " Crouches " + File.read(path + '/pushup.txt') + " Pushups"
     end
     reply.send_with(bot)
   end
